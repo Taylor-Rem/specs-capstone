@@ -1,6 +1,7 @@
 import openai
+import os
 
-openai.api_key = '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'
+openai.api_key = os.environ['API_KEY']
 openai.Model.list()
 
 def create_custom_image(user_prompt):

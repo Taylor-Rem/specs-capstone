@@ -46,5 +46,6 @@ input {
   display: flex;
   padding: 3rem;
   flex-direction: column;
-  background-color: #4a8f98;
+  background: linear-gradient(140deg, #4a8f98 0%, #8bdc9a 80%);
+  border-radius: 5px;
 }
