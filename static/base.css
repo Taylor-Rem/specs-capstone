@@ -1,0 +1,50 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  background-color: #333;
+}
+button {
+  color: black;
+  padding: 1rem;
+}
+button:hover {
+  cursor: pointer;
+}
+form > h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+input {
+  font-size: 1.5rem;
+  color: black;
+  margin-bottom: 1rem;
+}
+.welcome {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 5rem;
+}
+#register-login-container {
+  font-size: 1.5rem;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.register-login-form {
+  display: flex;
+  padding: 3rem;
+  flex-direction: column;
+  background-color: #4a8f98;
+}
