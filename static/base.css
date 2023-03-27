@@ -26,6 +26,26 @@ input {
   color: black;
   margin-bottom: 1rem;
 }
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  background: linear-gradient(140deg, #3bbca7 0%, #7cd38c 80%);
+  padding: 1rem;
+}
+a {
+  text-decoration: none;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #348678;
+  transition: all 0.3s;
+}
+a:hover {
+  color: #224943;
+  transition: all 0.3s;
+  border-radius: 15px;
+}
 .welcome {
   text-align: center;
   margin-top: 5rem;

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, session
+
 import crud
 from image_gen import create_custom_image
 from model import connect_to_db, db
@@ -8,11 +9,12 @@ app.secret_key = 'ai_overlords'
 
 @app.route('/')
 def homepage():
-  # if 'user' in session:
-  #   return render_template('homepage.html')
-  # else:
-  #   return render_template('register_login.html')
-  return render_template('register_login.html')
+  if 'email' in session:
+    email = session['email']
+    user = crud.get_user_by_email(email)
+    return render_template('homepage.html', user=user)
+  else:
+    return render_template('register_login.html')
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -20,7 +22,6 @@ def register():
   email = request.form.get('email')
   password = request.form.get('password')
   confirm_password = request.form.get('confirm_password')
-  print(username)
   user = crud.get_user_by_email(email)
 
   if user:
@@ -31,8 +32,8 @@ def register():
     user = crud.create_user(username, email, password)
     db.session.add(user)
     db.session.commit()
-    flash('Account created! Please log in')
-    session['user'] = user
+
+    session['email'] = email
   return redirect('/')
 
 @app.route('/login', methods=['POST'])
@@ -44,10 +45,19 @@ def login():
   if not user:
     flash('that user does not exist. Please Register')
   else:
-    session['user'] = user
-    print(session['user'])
-
+    session['email'] = email
   return redirect('/')
+
+@app.route('/logout')
+def logout():
+  del session['email']
+  flash('logged out')
+  return redirect ('/')
+
+@app.route('/user/<int:user_id>')
+def user(user_id):
+  user = crud.get_user_by_email(session['email'])
+  return render_template('user_details.html', user=user)
 
 # @app.route('/create_image', methods=['POST'])
 # def create_image():

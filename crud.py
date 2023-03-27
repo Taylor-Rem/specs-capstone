@@ -1,20 +1,27 @@
-from model import db, User
+from model import db, connect_to_db, User, Story, Scene, Storyboard, Image
 
 def create_user(username, email, password):
   user = User(username=username, email = email, password=password)
   return user
 
-def get_user_by_id(user_id):
-  return User.query.get(user_id)
-
 def get_user_by_email(email):
   return User.query.filter(User.email == email).first()
 
-def get_user_by_username(username):
-  return User.query.filter(user.username == username).first()
+def create_story(user_id, story_name):
+  story = Story(user_id=user_id, story_name=story_name)
+  return story
 
-def log_out(user_id):
-  pass
+def create_scene(story_id, scene_description):
+  story = Scene(story_id=story_id, scene_description=scene_description)
+  return story
+
+def create_storyboard(scene_id, storyboard_description, is_favorite):
+  storyboard = Storyboard(scene_id=scene_id, storyboard_description=storyboard_description, is_favorite=is_favorite)
+  return storyboard
+
+def create_image(storyboard_id, prompt, url, description):
+  image = Image(storyboard_id=storyboard_id, prompt=prompt, url=url, description=description)
+  return image
 
 if __name__ == '__main__':
   from server import app
