@@ -11,6 +11,8 @@ class User(db.Model):
   email = db.Column(db.String, unique=True)
   password = db.Column(db.String)
 
+  stories = db.relationship('Story', backref='user', lazy=True)
+
   def __repr__(self):
     return f"<User user_id={self.user_id} email={self.email} username={self.username} password={self.password}>"
   
@@ -20,6 +22,8 @@ class Story(db.Model):
   story_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
   story_name = db.Column(db.String)
+
+  scenes = db.relationship('Scene', backref='user', lazy=True)
 
   def __repr__(self):
     return f"<Story story_id={self.story_id} user_id={self.user_id} story_name={self.story_name}>"
@@ -31,6 +35,8 @@ class Scene(db.Model):
   story_id = db.Column(db.Integer, db.ForeignKey('stories.story_id'))
   scene_description = db.Column(db.String)
 
+  storyboards = db.relationship('Storyboard', backref='user', lazy=True)
+
   def __repr__(self):
     return f"<Scene scene_id={self.scene_id} story_id={self.story_id} scene_description={self.scene_description}>"
 
@@ -40,7 +46,9 @@ class Storyboard(db.Model):
   storyboard_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
   scene_id = db.Column(db.Integer, db.ForeignKey('scenes.scene_id'))
   storyboard_description = db.Column(db.String)
-  is_favorite = db.Column(db.Boolean, unique=True, default=False)
+  is_favorite = db.Column(db.Boolean, default=False)
+
+  images = db.relationship('Image', backref='user', lazy=True)
 
   def __repr__(self):
     return f"<Storyboard storyboard_id={self.storyboard_id} scene_id={self.scene_id} storyboard_description={self.storyboard_description} is_favorite={self.is_favorite}>"

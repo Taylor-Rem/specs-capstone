@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %} Capstone {% endblock %} {% block
+body %}
+<main>
+  <h1 class="welcome">Current Scene: "{{scene.scene_description}}"</h1>
+  <div class="add-container">
+    <form class="add-form" action="/add_storyboard" method="POST">
+      <input type="hidden" name="scene_id" value="{{scene.scene_id}}" />
+      <input
+        class="create-input"
+        type="text"
+        name="storyboard_description"
+        placeholder="storyboard name"
+      />
+      <button class="green-button">Create Storyboard</button>
+    </form>
+  </div>
+  <h1 class="your-table">Your Storyboards:</h1>
+  <div class="tables-container">
+    {% for storyboard in scene.storyboards %}
+    <div class="table-container">
+      <h1>{{storyboard.storyboard_description}}</h1>
+      <a
+        class="white-button"
+        href="{{ url_for('open_storyboard', storyboard_id=storyboard.storyboard_id) }}"
+        >Open Storyboard</a
+      >
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

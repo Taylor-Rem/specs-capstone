@@ -13,6 +13,7 @@ body {
 button {
   color: black;
   padding: 1rem;
+  border: none;
 }
 button:hover {
   cursor: pointer;
@@ -32,24 +33,21 @@ nav {
   background: linear-gradient(140deg, #3bbca7 0%, #7cd38c 80%);
   padding: 1rem;
 }
-a {
-  text-decoration: none;
-  background-color: white;
-  border-radius: 5px;
-  padding: 1rem;
-  font-size: 1.5rem;
-  color: #348678;
-  transition: all 0.3s;
-}
 a:hover {
   color: #224943;
   transition: all 0.3s;
   border-radius: 15px;
 }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  margin-top: 5rem;
+}
 .welcome {
   text-align: center;
-  margin-top: 5rem;
-  font-size: 5rem;
+  font-size: 3.5rem;
 }
 #register-login-container {
   font-size: 1.5rem;
@@ -68,4 +66,52 @@ a:hover {
   flex-direction: column;
   background: linear-gradient(140deg, #3bbca7 0%, #7cd38c 80%);
   border-radius: 5px;
+}
+.create-input {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  margin-right: 1rem;
+}
+.green-button {
+  background: linear-gradient(70deg, #389686 0%, #64a770 80%);
+  border-radius: 5px;
+  border: none;
+  color: white;
+}
+.white-button {
+  text-decoration: none;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #348678;
+  transition: all 0.3s;
+}
+.tables-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 60vw;
+  gap: 1rem;
+  justify-items: center;
+}
+.table-container {
+  background: linear-gradient(70deg, #389686 0%, #64a770 80%);
+  padding: 3rem;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.your-table {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: -2rem;
+}
+#image-gen-form {
+  display: flex;
+  flex-direction: column;
 }

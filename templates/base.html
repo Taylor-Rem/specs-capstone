@@ -15,11 +15,21 @@
     {% block head %}{% endblock %}
   </head>
   <body>
-    {% if 'email' in session %}
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% if 'email' in session %}
     <nav>
-      <a href="{{ url_for('homepage') }}">Home Page</a>
-      <a href="{{ url_for('user', user_id=user.user_id) }}">User Details</a>
-      <a href="{{ url_for('logout') }}">Log Out</a>
+      <a class="white-button" href="{{ url_for('homepage') }}">Home Page</a>
+      {% if user %}
+      <a class="white-button" href="{{ url_for('user', user_id=user.user_id) }}"
+        >User Details</a
+      >
+      {% endif %}
+      <a class="white-button" href="{{ url_for('logout') }}">Log Out</a>
     </nav>
     {% endif %} {% block body %}{% endblock %}
   </body>

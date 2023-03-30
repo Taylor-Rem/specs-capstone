@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block title %} Capstone {% endblock %} {% block
+body %}
+<main>
+  <h1>Generate an Image!</h1>
+  <h1>Current Storyboard: {{storyboard.storyboard_description}}</h1>
+  <form
+    id="image-gen-form"
+    action="{{ url_for('create_image') }}"
+    method="POST"
+  >
+    <input
+      type="hidden"
+      name="storyboard_id"
+      value="{{storyboard.storyboard_id}}"
+    />
+    <input type="text" placeholder="prompt" name="prompt" />
+    <input type="text" placeholder="description" name="description" />
+    <input type="text" placeholder="url" name="url" />
+    <button>Generate!</button>
+  </form>
+  <div id="storyboard-container">
+    {% for image in storyboard.images %}
+    <h1>Description: {{image.description}}</h1>
+    <img src="{{image.url}}" alt="{{image.description}}" />
+    <h1>Prompt: {{image.prompt}}</h1>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

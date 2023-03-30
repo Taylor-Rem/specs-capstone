@@ -1,8 +1,0 @@
-{% extends 'base.html' %} {% block title %} Capstone {% endblock %} {% block
-body %}
-<h1>Generate an Image!</h1>
-<form action="{{ url_for('create_image') }}" method="POST">
-  <input name="prompt" type="text" placeholder="type your prompt here" />
-  <button>Submit</button>
-</form>
-{% endblock %}

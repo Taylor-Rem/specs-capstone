@@ -1,4 +1,30 @@
 {% extends 'base.html' %} {% block title %} Capstone {% endblock %} {% block
 body %}
-<div class="story-container"></div>
+<main>
+  <h1 class="welcome">Welcome to Dalleboard!</h1>
+  <div class="add-container">
+    <form class="add-form" action="/add_story" method="POST">
+      <input
+        class="create-input"
+        type="text"
+        name="story_name"
+        placeholder="story name"
+      />
+      <button class="green-button">Create Story</button>
+    </form>
+  </div>
+  <h1 class="your-table">Your Stories:</h1>
+  <div class="tables-container">
+    {% for story in user.stories %}
+    <div class="table-container">
+      <h1>{{story.story_name}}</h1>
+      <a
+        class="white-button"
+        href="{{ url_for('open_story', story_id=story.story_id) }}"
+        >Open Story</a
+      >
+    </div>
+    {% endfor %}
+  </div>
+</main>
 {% endblock %}
