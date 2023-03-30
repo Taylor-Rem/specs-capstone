@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %} Capstone {% endblock %} {% block
+body %}
+<div id="image-details-container">
+  <div id="image-details-text">
+    <form class="image-edit-form" action="/edit_description" method="POST">
+      <h2>Image Description</h2>
+      <h3>{{image.description}}</h3>
+      <input type="hidden" name="image_id" value="{{image.image_id}}" />
+      <input
+        type="text"
+        placeholder="edit description"
+        name="image_description"
+      />
+      <button>Submit</button>
+    </form>
+    <form class="image-edit-form" action="/edit_prompt" method="POST">
+      <h2>Image Prompt</h2>
+      <h3>{{image.prompt}}</h3>
+      <input type="text" placeholder="edit prompt" name="image_prompt" />
+      <input type="hidden" name="image_id" value="{{image.image_id}}" />
+      <button>Regenerate Image</button>
+    </form>
+  </div>
+  <img
+    src="{{image.url}}"
+    alt="{{image.description}}"
+    id="image-details-image"
+  />
+</div>
+{% endblock %}

@@ -12,5 +12,3 @@ def create_custom_image(user_prompt):
   )
   url = response['data'][0]['url']
   return url
-
-# print(create_custom_image('astronaut using rocket boots to fly to the moon'))

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, session
-
+from image_gen import create_custom_image
 import crud
 from model import connect_to_db, db, User
 
@@ -116,11 +116,31 @@ def create_image():
   storyboard_id = request.form['storyboard_id']
   prompt = request.form['prompt']
   description = request.form['description']
-  url = request.form['url']
+  url = create_custom_image(prompt)
   image = crud.create_image(storyboard_id, prompt, url, description)
   db.session.add(image)
   db.session.commit()
   return redirect(f'/open_storyboard/{storyboard_id}')
+
+@app.route('/open_image/<int:image_id>')
+def open_image(image_id):
+  user = crud.get_user_by_email(session['email'])
+  image = crud.get_image_by_id(image_id)
+  return render_template('open_image.html', user=user, image=image)
+
+@app.route('/edit_description', methods=['POST'])
+def edit_description():
+  image_id = request.form['image_id']
+  new_description = request.form['image_description']
+  crud.update_image_description(image_id, new_description)
+  return redirect(f'/open_image/{image_id}')
+
+@app.route('/edit_prompt/', methods=['POST'])
+def edit_prompt():
+  image_id = request.form['image_id']
+  new_prompt = request.form['image_prompt']
+  crud.update_image_prompt(image_id, new_prompt)
+  return redirect(f'/open_image/{image_id}')
 
 if __name__ == '__main__':
   connect_to_db(app)
